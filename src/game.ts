@@ -2,7 +2,8 @@ import data from '@/data.json';
 import { random, nonZeroRandom } from '@/random';
 import { shuffle } from '@/utils';
 
-const words = data.words;
+const words = data.words.map((info) => info.word);
+const simpleWords = data.words.filter((info) => info.freq > 0.33).map((info) => info.word);
 const { vowels, consonants } = data.letters;
 
 export function drawLetters() {
@@ -23,17 +24,12 @@ export function drawLetters() {
   return shuffle(drawLetter).join('');
 }
 
-export function solve(drawLetter: string) {
-  return findLongestWords(drawLetter.split(''));
-}
-
-// Private
-
-function findLongestWords(letters: string[]) {
-  const letterCounts = countLetters(letters);
+export function findLongestWords(drawLetter: string, simple: boolean = false) {
+  const letterCounts = countLetters(drawLetter.split(''));
   let maxLen = 0;
   const result = [];
-  for (const word of words) {
+  const useWords = simple ? simpleWords : words;
+  for (const word of useWords) {
     if (word.length < maxLen) continue;
 
     if (canBuild(word, letterCounts)) {
@@ -47,6 +43,26 @@ function findLongestWords(letters: string[]) {
 
   return result;
 }
+
+export function extractWord(drawLetter: string, length: number, simple: boolean = false) {
+  const letters = drawLetter.split('');
+  const letterCounts = countLetters(letters);
+  const result = [];
+  const useWords = simple ? simpleWords : words;
+
+  for (const word of useWords) {
+    if (word.length !== length) continue;
+    if (canBuild(word, letterCounts)) {
+      result.push(word);
+    }
+  }
+  if (result.length === 0) {
+    return null;
+  }
+  return result[Math.floor(random() * result.length)];
+}
+
+// Private
 
 function countLetters(letters: string[]) {
   const counts: { [key: string]: number } = {};
