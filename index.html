@@ -1,24 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ABC Mix</title>
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <script type="module" crossorigin src="./assets/index-B5FZ4asE.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BT-_Goyt.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script type="module" crossorigin src="./assets/index-CLqFIBHV.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BnhIuvIq.css">
   </head>
-  <body>
-    <div id="app">
+  <body class="font-sans">
+    <div class="flex h-screen items-center justify-center bg-green-300">
       <div id="background"></div>
-      <div id="game">
-        <div id="timer">60</div>
-        <div id="letters"></div>
-        <input id="input" type="text" placeholder="Tape ton mot..." />
+      <div id="game" class="aspect-[9/16] h-full rounded-lg bg-black">
+        <div id="timer" class="text-2xl font-bold">60</div>
+        <div id="letters">
+          <button
+            id="pressButton"
+            class="my-letter-button relative overflow-hidden rounded-lg bg-blue-600 px-8 py-5 text-5xl font-extrabold text-white shadow-md transition-transform duration-150 active:scale-95"
+          >
+            <span>A</span>
+          </button>
+        </div>
+        <input
+          id="input"
+          type="text"
+          class="p-2 text-center text-[1.2rem]"
+          placeholder="Tape ton mot..."
+        />
         <div id="feedback"></div>
-        <button id="pass">Passer</button>
+        <button id="pass" class="px-4 py-2 text-base">Passer</button>
       </div>
-      <div id="results" hidden></div>
+      <div id="results" class="rounded-2xl bg-white p-4" hidden></div>
     </div>
   </body>
 </html>
