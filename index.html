@@ -8,12 +8,19 @@
     <link rel="stylesheet" href="src/style.scss" />
     <link rel="stylesheet" href="src/tailwind.css" />
   </head>
-  <body class="m-0 flex h-screen items-center justify-center bg-green-300 p-0 font-sans">
-    <div id="app">
+  <body class="font-sans">
+    <div class="flex h-screen items-center justify-center bg-green-300">
       <div id="background"></div>
-      <div id="game" class="z-[1] flex flex-col items-center gap-4 rounded-2xl bg-white p-8">
+      <div id="game" class="aspect-[9/16] h-full rounded-lg bg-black">
         <div id="timer" class="text-2xl font-bold">60</div>
-        <div id="letters" class="text-[2.5rem] tracking-[0.5rem]"></div>
+        <div id="letters">
+          <button
+            id="pressButton"
+            class="my-letter-button relative overflow-hidden rounded-lg bg-blue-600 px-8 py-5 text-5xl font-extrabold text-white shadow-md transition-transform duration-150 active:scale-95"
+          >
+            <span>A</span>
+          </button>
+        </div>
         <input
           id="input"
           type="text"

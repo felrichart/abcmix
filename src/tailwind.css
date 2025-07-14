@@ -1,1 +1,32 @@
 @import 'tailwindcss';
+
+.my-letter-button {
+  span {
+    @apply relative z-10;
+  }
+  &::after {
+    content: '';
+    @apply absolute inset-0 bg-gray-700;
+    top: 0;
+    z-index: 1;
+    height: 0%;
+    transition: height 0.25s ease;
+  }
+  &.my-inactive::after {
+    height: 100%;
+  }
+
+  transition: opacity 0.25s ease;
+  &.my-inactive {
+    opacity: 0.75;
+  }
+}
+
+@keyframes wipeDown {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
