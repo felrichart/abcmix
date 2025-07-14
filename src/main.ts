@@ -1,4 +1,4 @@
-const words = ['SOLEIL', 'CHAINE', 'TOMATE', 'NUAGES', 'CRAYON', 'PIGEON', 'BRUNIR', 'CITRON'];
+const words = ['FELIX', 'SOLEIL', 'CRAYONS', 'MOLLUSQUE', 'EXOTIQUES', 'CUISINIERE'];
 
 function shuffle(str: string): string {
   return str
