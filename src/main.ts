@@ -1,39 +1,28 @@
-const words = [
-  "SOLEIL",
-  "CHAINE",
-  "TOMATE",
-  "NUAGES",
-  "CRAYON",
-  "PIGEON",
-  "BRUNIR",
-  "CITRON",
-];
+const words = ['SOLEIL', 'CHAINE', 'TOMATE', 'NUAGES', 'CRAYON', 'PIGEON', 'BRUNIR', 'CITRON'];
 
 function shuffle(str: string): string {
   return str
-    .split("")
+    .split('')
     .sort(() => Math.random() - 0.5)
-    .join("");
+    .join('');
 }
 
-const seed =
-  new URLSearchParams(window.location.search).get("seed") ||
-  Date.now().toString();
+const seed = new URLSearchParams(window.location.search).get('seed') || Date.now().toString();
 const rng = mulberry32(hashCode(seed));
 
-let stages = [5, 6, 7, 8, 9, 10];
+const stages = [5, 6, 7, 8, 9, 10];
 let index = 0;
-let passed: string[] = [];
-let found: string[] = [];
-let currentWord = "";
+const passed: string[] = [];
+const found: string[] = [];
+let currentWord = '';
 let time = 60;
 
-const timerEl = document.getElementById("timer")!;
-const lettersEl = document.getElementById("letters")!;
-const inputEl = document.getElementById("input") as HTMLInputElement;
-const feedbackEl = document.getElementById("feedback")!;
-const passBtn = document.getElementById("pass")!;
-const resultsEl = document.getElementById("results")!;
+const timerEl = document.getElementById('timer')!;
+const lettersEl = document.getElementById('letters')!;
+const inputEl = document.getElementById('input') as HTMLInputElement;
+const feedbackEl = document.getElementById('feedback')!;
+const passBtn = document.getElementById('pass')!;
+const resultsEl = document.getElementById('results')!;
 
 function nextWord() {
   if (index >= stages.length && passed.length === 0) {
@@ -47,8 +36,8 @@ function nextWord() {
     currentWord = passed.shift()!;
   }
   lettersEl.textContent = shuffle(currentWord);
-  inputEl.value = "";
-  feedbackEl.textContent = "";
+  inputEl.value = '';
+  feedbackEl.textContent = '';
 }
 
 function pickWord(length: number): string {
@@ -57,26 +46,24 @@ function pickWord(length: number): string {
 }
 
 function endGame() {
-  (document.getElementById("game") as HTMLElement).hidden = true;
+  (document.getElementById('game') as HTMLElement).hidden = true;
   resultsEl.hidden = false;
-  resultsEl.innerHTML = `<h2>Résultats</h2><p>Tu as trouvé : ${found.join(
-    ", "
-  )}</p>`;
+  resultsEl.innerHTML = `<h2>Résultats</h2><p>Tu as trouvé : ${found.join(', ')}</p>`;
 }
 
-inputEl.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
+inputEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
     if (inputEl.value.toUpperCase() === currentWord) {
       found.push(currentWord);
-      feedbackEl.textContent = "✅ Correct !";
+      feedbackEl.textContent = '✅ Correct !';
       nextWord();
     } else {
-      feedbackEl.textContent = "❌ Faux";
+      feedbackEl.textContent = '❌ Faux';
     }
   }
 });
 
-passBtn.addEventListener("click", () => {
+passBtn.addEventListener('click', () => {
   passed.push(currentWord);
   nextWord();
 });
@@ -102,7 +89,7 @@ function hashCode(str: string): number {
 
 function mulberry32(a: number): () => number {
   return function () {
-    var t = (a += 0x6d2b79f5);
+    let t = (a += 0x6d2b79f5);
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
